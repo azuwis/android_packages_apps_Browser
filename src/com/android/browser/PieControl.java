@@ -19,6 +19,7 @@ package com.android.browser;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -68,6 +69,7 @@ public class PieControl implements PieMenu.PieController, OnClickListener {
     private PieItem mFind;
     private PieItem mShare;
     private PieItem mRDS;
+    private PieItem mInverted;
     private TabAdapter mTabAdapter;
 
     public PieControl(Activity activity, UiController controller, BaseUi ui) {
@@ -126,6 +128,12 @@ public class PieControl implements PieMenu.PieController, OnClickListener {
             } else {
                 icon.setImageResource(R.drawable.ic_desktop_holo_dark);
             }
+            icon = (ImageView) mInverted.getView();
+            if (mUiController.getSettings().useInvertedRendering()) {
+                icon.clearColorFilter();
+            } else {
+                icon.setColorFilter(Color.BLACK);
+            }
         }
         return true;
     }
@@ -148,6 +156,7 @@ public class PieControl implements PieMenu.PieController, OnClickListener {
         mShowTabs = new PieItem(tabs, 1);
         mOptions = makeItem(R.drawable.ic_settings_holo_dark, 1);
         mRDS = makeItem(R.drawable.ic_desktop_holo_dark, 1);
+        mInverted = makeItem(R.drawable.ic_web_holo_dark, 1);
         mTabAdapter = new TabAdapter(mActivity, mUiController);
         PieStackView stack = new PieStackView(mActivity);
         stack.setLayoutListener(new OnLayoutListener() {
@@ -161,14 +170,14 @@ public class PieControl implements PieMenu.PieController, OnClickListener {
         mShowTabs.setPieView(stack);
         setClickListener(this, mBack, mRefresh, mForward, mUrl, mFind, mInfo,
                 mShare, mBookmarks, mNewTab, mIncognito, mClose, mHistory,
-                mAddBookmark, mOptions, mRDS);
+                mAddBookmark, mOptions, mRDS, mInverted);
         if (!BrowserActivity.isTablet(mActivity)) {
             mShowTabs.getView().setOnClickListener(this);
         }
         // level 1
         mPie.addItem(mOptions);
         mOptions.addItem(mRDS);
-        mOptions.addItem(makeFiller());
+        mOptions.addItem(mInverted);
         mOptions.addItem(makeFiller());
         mOptions.addItem(makeFiller());
         mPie.addItem(mBack);
@@ -233,6 +242,8 @@ public class PieControl implements PieMenu.PieController, OnClickListener {
             mUiController.findOnPage();
         } else if (mRDS.getView() == v) {
             mUiController.toggleUserAgent();
+        } else if (mInverted.getView() == v) {
+            mUiController.toggleInvertedRendering();
         } else if (mShowTabs.getView() == v) {
             ((PhoneUi) mUi).showNavScreen();
         }
