@@ -657,6 +657,11 @@ public class BrowserSettings implements OnSharedPreferenceChangeListener,
         }
     }
 
+    public void toggleInvertedRendering() {
+        boolean inverted = useInvertedRendering();
+        mPrefs.edit().putBoolean(PREF_INVERTED, !inverted).apply();
+    }
+
     public static int getAdjustedMinimumFontSize(int rawValue) {
         rawValue++; // Preference starts at 0, min font at 1
         if (rawValue > 1) {

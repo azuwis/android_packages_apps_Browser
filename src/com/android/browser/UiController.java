@@ -107,6 +107,8 @@ public interface UiController {
 
     void toggleCookiesWhitelisted();
 
+    void toggleInvertedRendering();
+
     void toggleFullscreen();
 
     BrowserSettings getSettings();

@@ -1759,6 +1759,11 @@ public class Controller
     }
 
     @Override
+    public void toggleInvertedRendering() {
+        mSettings.toggleInvertedRendering();
+    }
+
+    @Override
     public void toggleFullscreen() {
         mUi.setFullscreen(!mUi.isFullscreen());
     }
