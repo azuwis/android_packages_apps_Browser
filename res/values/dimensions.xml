@@ -13,7 +13,7 @@
 <resources
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <dimen name="tab_width">180dp</dimen>
-    <dimen name="tab_height">22dp</dimen>
+    <dimen name="tab_height">44dp</dimen>
     <dimen name="tab_overlap">8dp</dimen>
     <dimen name="tab_addoverlap">14dp</dimen>
     <dimen name="tab_slice">15.5dp</dimen>
@@ -64,7 +64,7 @@
     <dimen name="nav_tab_spacing">8dp</dimen>
     <dimen name="menu_width">240dip</dimen>
     <dimen name="menu_height">32dip</dimen>
-    <dimen name="toolbar_height">26dip</dimen>
+    <dimen name="toolbar_height">52dip</dimen>
     <dimen name="tab_thumbnail_width">240dip</dimen>
     <dimen name="tab_thumbnail_height">160dip</dimen>
     <dimen name="nav_tab_width">240dip</dimen>
